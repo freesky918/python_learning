@@ -1,0 +1,25 @@
+#encoding=utf-8
+import jieba
+#分词
+sentence="近日，习近平总书记在主持中共中央政治局第二十五次集体学习时指出，70年前，中国人民经过艰苦卓绝的浴血奋战，打败了穷凶极恶的日本军国主义侵略者，赢得了近代以来中国抗击外敌入侵的第一次完全胜利，这一伟大胜利，开辟了中华民族伟大复兴的光明前景，开启了古老中国凤凰涅槃、浴火重生的新征程。这是习总书记继去年出席纪念全民族抗战爆发77周年仪式和纪念中国人民抗日战争暨世界反法西斯战争胜利69周年座谈会，今年参观《伟大胜利历史贡献》主题展览后，再次在讲话中高度评价中国人民抗日战争胜利的历史意义。习近平在集体学习讲话中进一步强调，要深入开展中国人民抗日战争研究，必须坚持正确历史观、加强规划和力量整合、加强史料收集和整理、加强舆论宣传工作，让历史说话，用史实发言，着力研究和深入阐释中国人民抗日战争的伟大意义、中国人民抗日战争在世界反法西斯战争中的重要地位、中国共产党的中流砥柱作用是中国人民抗日战争胜利的关键等重大问题。"
+seg_list=jieba.cut(sentence,cut_all=False)
+print  "/".join(seg_list)
+print "==============cut================","关键词提取"
+#关键词提取
+import jieba.analyse
+keyword_list=jieba.analyse.extract_tags(sentence)
+print "句子中的关键词为：\n",",".join(keyword_list)
+print "==============cut=================","词频统计"
+keyword_list=jieba.analyse.extract_tags(sentence,topK=10,withWeight=True,allowPOS=0)
+#以下部分转码会出错，暂且注释掉，以后再调
+print "词语            词频"
+for word, value in keyword_list:
+    print word,"   ",value
+print "==============cut=================","词性标注"
+
+#词性标注
+#encoding=utf-8
+import jieba.posseg as pseg
+words=pseg.cut("我爱北京天安门")
+for word, flag in words:
+    print word,flag
